@@ -85,14 +85,13 @@ p {
     gap: 12px; 
 }
 
-/* Wrapper to position the popups relative to each button on desktop */
 .social-wrapper {
     position: relative;
     display: block;
 }
 
-/* Special wrapper for the resume button to span full width */
-.resume-wrapper {
+/* Reusable class to make a button span both columns */
+.full-width {
     grid-column: 1 / -1; 
 }
 
@@ -133,7 +132,7 @@ p {
     transform: translateX(-50%);
     background: rgba(0, 0, 0, 0.85);
     color: white;
-    padding: 8px 16px;
+    padding: 12px 20px;
     border-radius: 8px;
     font-size: 13px;
     white-space: nowrap;
@@ -141,6 +140,8 @@ p {
     z-index: 100;
     border: 1px solid rgba(255,255,255,0.1);
     pointer-events: none;
+    text-align: center;
+    line-height: 1.8; /* Give the text some breathing room */
 }
 
 /* JS active class for showing the popup */
@@ -159,13 +160,13 @@ p {
 }
 
 .popup.top { bottom: 130%; }
-.popup.bottom { top: 130%; }
 
 .popup a.email-link {
     color: #4da6ff;
     text-decoration: none;
     font-weight: 600;
     transition: color 0.2s;
+    display: block; /* Puts the email on its own line */
 }
 
 .popup a.email-link:hover {
@@ -185,16 +186,16 @@ p {
 @media (max-width: 480px) {
     .card {
         padding: 30px 20px;
-        position: relative; /* Becomes the container for the mobile popup */
-        overflow: hidden; /* Keeps the dark overlay inside the rounded corners */
+        position: relative; 
+        overflow: hidden; 
     }
 
     .socials {
-        grid-template-columns: 1fr; /* Stack buttons */
+        grid-template-columns: 1fr; /* Stack all buttons */
     }
 
     .social-wrapper {
-        position: static; /* Let the popup break free from the button and cover the card */
+        position: static; 
     }
 
     .social-btn {
@@ -202,23 +203,23 @@ p {
         font-size: 13px; 
     }
 
-    /* Convert Popups to cover the entire Glass Card on Mobile */
+    /* Convert Popup to cover the entire Glass Card on Mobile */
     .popup {
-        position: absolute; /* Positions perfectly over the .card */
+        position: absolute; 
         top: 0;
         left: 0;
-        bottom: auto; /* overrides desktop settings */
+        bottom: auto; 
         width: 100%;
         height: 100%;
         transform: none; 
-        background: rgba(0, 0, 0, 0.95); /* Very dark to easily read the email */
+        background: rgba(0, 0, 0, 0.95); 
         border-radius: 20px;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
         white-space: normal; 
-        font-size: 20px; 
+        font-size: 18px; 
         z-index: 999;
     }
 
@@ -227,10 +228,12 @@ p {
         text-align: center;
         word-break: break-all; 
         padding: 0 20px;
+        line-height: 2;
     }
 
     .popup a.email-link {
         font-size: 18px; 
+        margin-top: 5px;
     }
 
     /* Show Close Button on Mobile */
@@ -269,10 +272,14 @@ p {
 
     <div class="socials">
         
-        <div class="social-wrapper">
+        <div class="social-wrapper full-width">
             <a href="#" class="social-btn popup-trigger">Contact Me</a>
             <div class="popup top">
-                <div class="popup-content">+918888783131</div>
+                <div class="popup-content">
+                    <strong>Phone:</strong> +918888783131<br>
+                    <strong>Email:</strong> 
+                    <a href="mailto:tempmail@gmail.com" class="email-link">tusharkalemail@yahoo.in</a>
+                </div>
                 <div class="close-btn">Close</div>
             </div>
         </div>
@@ -285,17 +292,7 @@ p {
             <a href="https://www.behance.net/tusharkaleTK/projects" target="_blank" rel="noopener noreferrer" class="social-btn">Behance_Portfolio</a>
         </div>
 
-        <div class="social-wrapper">
-            <a href="#" class="social-btn popup-trigger">Email Me</a>
-            <div class="popup bottom">
-                <div class="popup-content">
-                    <a href="mailto:tempmail@gmail.com" class="email-link">tusharkalemail@yahoo.in</a>
-                </div>
-                <div class="close-btn">Close</div>
-            </div>
-        </div>
-
-        <div class="social-wrapper resume-wrapper">
+        <div class="social-wrapper full-width">
             <a href="https://drive.google.com/uc?export=download&id=1sE3xrhiO1wweiZ3p_pYQx_3DFQcoACyB" download class="social-btn resume-btn">Download Resume</a>
         </div>
 
@@ -306,11 +303,11 @@ p {
     const popupTriggers = document.querySelectorAll('.popup-trigger');
     const closeButtons = document.querySelectorAll('.close-btn');
 
-    // Open popup on button click (Added support to ensure mobile compatibility)
+    // Open popup on button click 
     popupTriggers.forEach(trigger => {
         trigger.addEventListener('click', function(e) {
             e.preventDefault(); 
-            e.stopPropagation(); // Stops the window click from instantly closing it
+            e.stopPropagation(); 
             
             document.querySelectorAll('.popup').forEach(p => p.classList.remove('active'));
             
