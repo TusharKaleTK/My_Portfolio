@@ -85,7 +85,7 @@ p {
     gap: 12px; 
 }
 
-/* Wrapper to position the popups relative to each button */
+/* Wrapper to position the popups relative to each button on desktop */
 .social-wrapper {
     position: relative;
     display: block;
@@ -93,7 +93,7 @@ p {
 
 /* Special wrapper for the resume button to span full width */
 .resume-wrapper {
-    grid-column: 1 / -1; /* Tells the item to span all available columns */
+    grid-column: 1 / -1; 
 }
 
 .social-btn {
@@ -113,7 +113,6 @@ p {
     cursor: pointer;
 }
 
-/* Highlight the resume button slightly so it stands out */
 .resume-btn {
     background: rgba(255, 255, 255, 0.25);
     font-weight: 600;
@@ -144,6 +143,7 @@ p {
     pointer-events: none;
 }
 
+/* JS active class for showing the popup */
 .popup.active {
     visibility: visible;
     opacity: 1;
@@ -185,10 +185,16 @@ p {
 @media (max-width: 480px) {
     .card {
         padding: 30px 20px;
+        position: relative; /* Becomes the container for the mobile popup */
+        overflow: hidden; /* Keeps the dark overlay inside the rounded corners */
     }
 
     .socials {
         grid-template-columns: 1fr; /* Stack buttons */
+    }
+
+    .social-wrapper {
+        position: static; /* Let the popup break free from the button and cover the card */
     }
 
     .social-btn {
@@ -196,41 +202,41 @@ p {
         font-size: 13px; 
     }
 
-    /* Convert Popups to Full Screen Modals on Mobile */
+    /* Convert Popups to cover the entire Glass Card on Mobile */
     .popup {
-        position: fixed;
+        position: absolute; /* Positions perfectly over the .card */
         top: 0;
         left: 0;
-        width: 100vw;
-        height: 100vh;
+        bottom: auto; /* overrides desktop settings */
+        width: 100%;
+        height: 100%;
         transform: none; 
-        background: #0f0f0f; 
-        border-radius: 0;
-        border: none;
+        background: rgba(0, 0, 0, 0.95); /* Very dark to easily read the email */
+        border-radius: 20px;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
         white-space: normal; 
-        font-size: 24px; 
+        font-size: 20px; 
         z-index: 999;
     }
 
     .popup-content {
-        margin-bottom: 30px;
+        margin-bottom: 20px;
         text-align: center;
         word-break: break-all; 
         padding: 0 20px;
     }
 
     .popup a.email-link {
-        font-size: 20px; 
+        font-size: 18px; 
     }
 
     /* Show Close Button on Mobile */
     .close-btn {
         display: inline-block;
-        margin-top: 20px;
+        margin-top: 15px;
         padding: 10px 25px;
         background: rgba(255,255,255,0.1);
         color: white;
@@ -300,10 +306,11 @@ p {
     const popupTriggers = document.querySelectorAll('.popup-trigger');
     const closeButtons = document.querySelectorAll('.close-btn');
 
-    // Open popup on button click
+    // Open popup on button click (Added support to ensure mobile compatibility)
     popupTriggers.forEach(trigger => {
         trigger.addEventListener('click', function(e) {
             e.preventDefault(); 
+            e.stopPropagation(); // Stops the window click from instantly closing it
             
             document.querySelectorAll('.popup').forEach(p => p.classList.remove('active'));
             
@@ -317,6 +324,7 @@ p {
     // Close popup on "Close" button click
     closeButtons.forEach(btn => {
         btn.addEventListener('click', function(e) {
+            e.preventDefault();
             e.stopPropagation(); 
             this.closest('.popup').classList.remove('active');
         });
@@ -324,7 +332,7 @@ p {
 
     // Close popups if the user clicks anywhere outside of them
     window.addEventListener('click', function(e) {
-        if (!e.target.closest('.social-wrapper')) {
+        if (!e.target.closest('.popup') && !e.target.closest('.popup-trigger')) {
             document.querySelectorAll('.popup').forEach(p => p.classList.remove('active'));
         }
     });
