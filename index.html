@@ -23,7 +23,6 @@ body {
     justify-content: center;
     color: white;
     overflow: hidden;
-    /* Added slight padding so the card doesn't hit the screen edges on tiny devices */
     padding: 20px; 
 }
 
@@ -40,7 +39,6 @@ body {
 
 /* Glass Card */
 .card {
-    /* Responsive width: takes up 90% of screen but maxes out at 400px */
     width: 100%; 
     max-width: 400px; 
     padding: 40px;
@@ -83,7 +81,7 @@ p {
 /* Social Buttons Grid */
 .socials {
     display: grid;
-    grid-template-columns: 1fr 1fr; /* 2 columns on desktop/tablet */
+    grid-template-columns: 1fr 1fr; 
     gap: 12px; 
 }
 
@@ -105,9 +103,9 @@ p {
     border: 1px solid rgba(255,255,255,0.2);
     transition: 0.3s;
     white-space: nowrap; 
-    /* Ensures long text scales down elegantly if needed */
     text-overflow: ellipsis; 
     overflow: hidden;
+    cursor: pointer;
 }
 
 .social-btn:hover {
@@ -116,44 +114,46 @@ p {
     transform: scale(1.05); 
 }
 
-/* Popup Container Styles */
+/* Base Popup Styles (Desktop/Tablet Tooltip) */
 .popup {
     visibility: hidden;
     opacity: 0;
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
-    background: rgba(0, 0, 0, 0.8);
+    background: rgba(0, 0, 0, 0.85);
     color: white;
-    padding: 6px 12px;
+    padding: 8px 16px;
     border-radius: 8px;
     font-size: 13px;
     white-space: nowrap;
     transition: opacity 0.3s ease, visibility 0.3s ease;
-    z-index: 10;
+    z-index: 100;
     border: 1px solid rgba(255,255,255,0.1);
     pointer-events: none;
 }
 
-/* Show the popup when hovering over the wrapper */
-.social-wrapper:hover .popup,
-.social-wrapper:focus-within .popup { /* Added focus-within for touch/keyboard accessibility */
+/* JS active class for showing the popup */
+.popup.active {
     visibility: visible;
     opacity: 1;
     pointer-events: auto;
 }
 
-/* Popup Above */
-.popup.top {
-    bottom: 130%; 
+/* Hover fallback for desktop */
+@media (hover: hover) {
+    .social-wrapper:hover .popup {
+        visibility: visible;
+        opacity: 1;
+        pointer-events: auto;
+    }
 }
 
-/* Popup Below */
-.popup.bottom {
-    top: 130%; 
-}
+/* Popup Placement on Desktop */
+.popup.top { bottom: 130%; }
+.popup.bottom { top: 130%; }
 
-/* Clickable Email inside Popup */
+/* Links inside Popup */
 .popup a.email-link {
     color: #4da6ff;
     text-decoration: none;
@@ -166,33 +166,80 @@ p {
     text-decoration: underline;
 }
 
+/* Hide close button on desktop */
+.close-btn {
+    display: none; 
+}
+
+
 /* ========================================= */
-/* MEDIA QUERIES FOR TABLET & MOBILE         */
+/* MEDIA QUERIES FOR MOBILE (< 480px)        */
 /* ========================================= */
 
 @media (max-width: 480px) {
     .card {
-        padding: 30px 20px; /* Reduce padding slightly on very small screens */
+        padding: 30px 20px;
     }
 
     .socials {
-        grid-template-columns: 1fr; /* Stack buttons into a single column */
+        grid-template-columns: 1fr; /* Stack buttons */
     }
 
     .social-btn {
-        padding: 12px 10px; /* Larger tap targets for mobile users */
+        padding: 12px 10px; 
         font-size: 13px; 
     }
 
-    /* Adjust popups so they don't flow off the screen horizontally */
+    /* Convert Popups to Full Screen Modals on Mobile */
     .popup {
-        white-space: normal;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        transform: none; /* Remove centering transform from desktop */
+        background: #0f0f0f; /* Solid dark background to hide video */
+        border-radius: 0;
+        border: none;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        white-space: normal; /* Allow wrapping */
+        font-size: 24px; /* Zoomed-in text */
+        z-index: 999;
+    }
+
+    .popup-content {
+        margin-bottom: 30px;
         text-align: center;
-        width: max-content;
-        max-width: 200px; /* Prevent it from being too wide */
+        word-break: break-all; /* Prevent long emails from breaking layout */
+        padding: 0 20px;
+    }
+
+    .popup a.email-link {
+        font-size: 20px; /* Bigger email link */
+    }
+
+    /* Show Close Button on Mobile */
+    .close-btn {
+        display: inline-block;
+        margin-top: 20px;
+        padding: 10px 25px;
+        background: rgba(255,255,255,0.1);
+        color: white;
+        border: 1px solid rgba(255,255,255,0.3);
+        border-radius: 30px;
+        font-size: 14px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    .close-btn:hover {
+        background: white;
+        color: black;
     }
 }
-
 </style>
 </head>
 
@@ -211,8 +258,11 @@ p {
     <div class="socials">
         
         <div class="social-wrapper">
-            <span class="popup top">+918888783131</span>
-            <a href="#" class="social-btn">Contact Me</a>
+            <a href="#" class="social-btn popup-trigger">Contact Me</a>
+            <div class="popup top">
+                <div class="popup-content">+918888783131</div>
+                <div class="close-btn">Close</div>
+            </div>
         </div>
 
         <div class="social-wrapper">
@@ -224,14 +274,53 @@ p {
         </div>
 
         <div class="social-wrapper">
-            <a href="#" class="social-btn">Email Me</a>
+            <a href="#" class="social-btn popup-trigger">Email Me</a>
             <div class="popup bottom">
-                <a href="mailto:tempmail@gmail.com" class="email-link">tusharkalemail@yahoo.in</a>
+                <div class="popup-content">
+                    <a href="mailto:tempmail@gmail.com" class="email-link">tusharkalemail@yahoo.in</a>
+                </div>
+                <div class="close-btn">Close</div>
             </div>
         </div>
 
     </div>
 </div>
+
+<script>
+    const popupTriggers = document.querySelectorAll('.popup-trigger');
+    const closeButtons = document.querySelectorAll('.close-btn');
+
+    // Open popup on button click
+    popupTriggers.forEach(trigger => {
+        trigger.addEventListener('click', function(e) {
+            e.preventDefault(); // Prevent page from jumping to top
+            
+            // Close all other active popups first (so only one shows at a time)
+            document.querySelectorAll('.popup').forEach(p => p.classList.remove('active'));
+            
+            // Find the popup next to the clicked button and activate it
+            const popup = this.nextElementSibling;
+            if(popup && popup.classList.contains('popup')) {
+                popup.classList.add('active');
+            }
+        });
+    });
+
+    // Close popup on "Close" button click
+    closeButtons.forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            e.stopPropagation(); // Stop click from triggering anything else
+            this.closest('.popup').classList.remove('active');
+        });
+    });
+
+    // Optional: Close popups if the user clicks anywhere outside of them
+    window.addEventListener('click', function(e) {
+        if (!e.target.closest('.social-wrapper')) {
+            document.querySelectorAll('.popup').forEach(p => p.classList.remove('active'));
+        }
+    });
+</script>
 
 </body>
 </html>
