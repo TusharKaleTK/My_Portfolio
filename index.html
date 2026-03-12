@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>My Portfolio</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    overflow: hidden;
+}
+
+/* Video Background */
+#bg-video {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+}
+
+/* Glass Card */
+.card {
+    /* Slightly increased width to comfortably fit the 2x2 grid with long text */
+    width: 360px; 
+    padding: 40px;
+    text-align: center;
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: blur(15px);
+    border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.2);
+    box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+    transition: 0.4s;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+}
+
+/* Profile */
+.profile-img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    margin-bottom: 15px;
+    border: 3px solid rgba(255,255,255,0.4);
+}
+
+/* Text */
+h1 {
+    font-size: 24px;
+    font-weight: 600;
+}
+
+p {
+    font-size: 14px;
+    opacity: 0.8;
+    margin-top: 5px;
+    margin-bottom: 25px;
+}
+
+/* Social Buttons Grid (2x2 Layout) */
+.socials {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Creates two equal columns */
+    gap: 12px; /* Spacing between the grid items */
+}
+
+/* Wrapper to position the popups relative to each button */
+.social-wrapper {
+    position: relative;
+    display: block;
+}
+
+.social-btn {
+    display: block;
+    width: 100%; /* Forces all buttons to stretch and match in size */
+    padding: 10px 5px;
+    border-radius: 30px;
+    text-decoration: none;
+    color: white;
+    font-size: 12px; /* Shrunk slightly so "Behance_Portfolio" fits beautifully */
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.2);
+    transition: 0.3s;
+    white-space: nowrap; /* Prevents text from breaking onto two lines */
+}
+
+.social-btn:hover {
+    background: white;
+    color: black;
+    transform: scale(1.05); /* Slightly reduced scale to prevent grid overlap */
+}
+
+/* Popup Container Styles */
+.popup {
+    visibility: hidden;
+    opacity: 0;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-size: 13px;
+    white-space: nowrap;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    z-index: 10;
+    border: 1px solid rgba(255,255,255,0.1);
+    pointer-events: none;
+}
+
+/* Show the popup when hovering over the wrapper */
+.social-wrapper:hover .popup {
+    visibility: visible;
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* Popup Above (for Row 1) */
+.popup.top {
+    bottom: 130%; 
+}
+
+/* Popup Below (for Row 2) */
+.popup.bottom {
+    top: 130%; 
+}
+
+/* Clickable Email inside Popup */
+.popup a.email-link {
+    color: #4da6ff;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.2s;
+}
+
+.popup a.email-link:hover {
+    color: #80c1ff;
+    text-decoration: underline;
+}
+
+</style>
+</head>
+
+<body>
+
+<video autoplay muted loop id="bg-video">
+    <source src="video/background.mp4" type="video/mp4">
+</video>
+
+<div class="card">
+    <img src="img/profile.jpg" class="profile-img">
+
+    <h1>Tushar Kale</h1>
+    <p>Motion Graphic • Designer • Creator</p>
+
+    <div class="socials">
+        
+        <div class="social-wrapper">
+            <span class="popup top">+918888783131</span>
+            <a href="#" class="social-btn">Contact Me</a>
+        </div>
+
+        <div class="social-wrapper">
+            <a href="https://www.linkedin.com/in/tushar-kale-759635169" target="_blank" rel="noopener noreferrer" class="social-btn">LinkedIn Profile</a>
+        </div>
+
+        <div class="social-wrapper">
+            <a href="https://www.behance.net/tusharkaleTK/projects" target="_blank" rel="noopener noreferrer" class="social-btn">Behance_Portfolio</a>
+        </div>
+
+        <div class="social-wrapper">
+            <a href="#" class="social-btn">Email Me</a>
+            <div class="popup bottom">
+                <a href="mailto:tempmail@gmail.com" class="email-link">tusharkalemail@yahoo.in</a>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+</body>
+</html>
