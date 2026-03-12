@@ -23,6 +23,8 @@ body {
     justify-content: center;
     color: white;
     overflow: hidden;
+    /* Added slight padding so the card doesn't hit the screen edges on tiny devices */
+    padding: 20px; 
 }
 
 /* Video Background */
@@ -38,8 +40,9 @@ body {
 
 /* Glass Card */
 .card {
-    /* Slightly increased width to comfortably fit the 2x2 grid with long text */
-    width: 360px; 
+    /* Responsive width: takes up 90% of screen but maxes out at 400px */
+    width: 100%; 
+    max-width: 400px; 
     padding: 40px;
     text-align: center;
     background: rgba(255,255,255,0.1);
@@ -77,11 +80,11 @@ p {
     margin-bottom: 25px;
 }
 
-/* Social Buttons Grid (2x2 Layout) */
+/* Social Buttons Grid */
 .socials {
     display: grid;
-    grid-template-columns: 1fr 1fr; /* Creates two equal columns */
-    gap: 12px; /* Spacing between the grid items */
+    grid-template-columns: 1fr 1fr; /* 2 columns on desktop/tablet */
+    gap: 12px; 
 }
 
 /* Wrapper to position the popups relative to each button */
@@ -92,22 +95,25 @@ p {
 
 .social-btn {
     display: block;
-    width: 100%; /* Forces all buttons to stretch and match in size */
+    width: 100%; 
     padding: 10px 5px;
     border-radius: 30px;
     text-decoration: none;
     color: white;
-    font-size: 12px; /* Shrunk slightly so "Behance_Portfolio" fits beautifully */
+    font-size: 12px; 
     background: rgba(255,255,255,0.15);
     border: 1px solid rgba(255,255,255,0.2);
     transition: 0.3s;
-    white-space: nowrap; /* Prevents text from breaking onto two lines */
+    white-space: nowrap; 
+    /* Ensures long text scales down elegantly if needed */
+    text-overflow: ellipsis; 
+    overflow: hidden;
 }
 
 .social-btn:hover {
     background: white;
     color: black;
-    transform: scale(1.05); /* Slightly reduced scale to prevent grid overlap */
+    transform: scale(1.05); 
 }
 
 /* Popup Container Styles */
@@ -130,18 +136,19 @@ p {
 }
 
 /* Show the popup when hovering over the wrapper */
-.social-wrapper:hover .popup {
+.social-wrapper:hover .popup,
+.social-wrapper:focus-within .popup { /* Added focus-within for touch/keyboard accessibility */
     visibility: visible;
     opacity: 1;
     pointer-events: auto;
 }
 
-/* Popup Above (for Row 1) */
+/* Popup Above */
 .popup.top {
     bottom: 130%; 
 }
 
-/* Popup Below (for Row 2) */
+/* Popup Below */
 .popup.bottom {
     top: 130%; 
 }
@@ -159,12 +166,39 @@ p {
     text-decoration: underline;
 }
 
+/* ========================================= */
+/* MEDIA QUERIES FOR TABLET & MOBILE         */
+/* ========================================= */
+
+@media (max-width: 480px) {
+    .card {
+        padding: 30px 20px; /* Reduce padding slightly on very small screens */
+    }
+
+    .socials {
+        grid-template-columns: 1fr; /* Stack buttons into a single column */
+    }
+
+    .social-btn {
+        padding: 12px 10px; /* Larger tap targets for mobile users */
+        font-size: 13px; 
+    }
+
+    /* Adjust popups so they don't flow off the screen horizontally */
+    .popup {
+        white-space: normal;
+        text-align: center;
+        width: max-content;
+        max-width: 200px; /* Prevent it from being too wide */
+    }
+}
+
 </style>
 </head>
 
 <body>
 
-<video autoplay muted loop id="bg-video">
+<video autoplay muted loop playsinline id="bg-video">
     <source src="video/background.mp4" type="video/mp4">
 </video>
 
