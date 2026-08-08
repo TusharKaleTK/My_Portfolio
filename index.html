@@ -317,9 +317,6 @@ h3 { font-size: 19px; line-height: 1.3; }
   color: #fff; letter-spacing: -0.02em; line-height: 1;
 }
 .cred-num.text-stat { font-size: clamp(26px, 2.8vw, 36px); font-weight: 600; color: rgba(255,255,255,0.92); }
-  font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
-  color: rgba(255,255,255,0.85); margin-top: 14px;
-}
 .cred-lbl {
   font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
   color: rgba(255,255,255,0.85); margin-top: 14px;
@@ -426,6 +423,11 @@ footer .wrap { display: flex; justify-content: space-between; align-items: cente
 
 /* ─── RESPONSIVE ─── */
 @media (max-width: 900px) {
+  .orb.o3, .orb.o4 { display: none; }
+  .orb.o1, .orb.o2 { filter: blur(55px); opacity: 0.38; animation-duration: 24s; }
+  .gradient-field::after { display: none; }
+  .kinetic-word { animation: none; background-position: 30% 50%; }
+  body::before { display: none; }
   .cap-grid { grid-template-columns: 1fr; gap: 36px; }
   .case-row { grid-template-columns: 1fr; gap: 24px; }
   .case-row.reverse .case-thumb { order: 1; }
@@ -441,10 +443,12 @@ footer .wrap { display: flex; justify-content: space-between; align-items: cente
   .section { padding: 64px 0; }
   .hero { padding-top: 128px; }
   .cred-grid { grid-template-columns: 1fr; row-gap: 28px; }
-  .flow-grid { grid-template-columns: 1fr; gap: 26px; border-left: 1px solid var(--line); padding-left: 22px; }
-  .flow-step { flex-direction: row; align-items: flex-start; text-align: left; gap: 14px; position: relative; padding: 0; }
-  .flow-n { position: absolute; left: -22px; top: -18px; }
-  .flow-dot { position: absolute; left: -26px; top: 4px; margin: 0; }
+  .flow-grid { grid-template-columns: 1fr; gap: 30px; border-left: 1px solid var(--line); padding-left: 24px; }
+  .flow-step { flex-direction: column; align-items: flex-start; text-align: left; gap: 3px; position: relative; padding: 0; }
+  .flow-n { position: static; margin: 0 0 2px; }
+  .flow-dot { position: absolute; left: -28px; top: 6px; margin: 0; }
+  .flow-lbl { margin: 0; }
+  .flow-tools { margin-top: 1px; }
   .contact-grid { flex-direction: column; }
   .cursor-tag { display: none; }
 }
