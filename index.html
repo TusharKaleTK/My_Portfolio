@@ -162,13 +162,10 @@ h3 { font-size: 19px; line-height: 1.3; }
   font-family: var(--font-display); font-weight: 700; letter-spacing: -0.02em;
   font-size: clamp(42px, 7vw, 80px); line-height: 1;
   background: linear-gradient(100deg, var(--grad-blue), var(--grad-purple) 35%, var(--grad-pink) 65%, var(--grad-orange));
-  background-size: 260% 100%;
+  background-position: 30% 50%;
   -webkit-background-clip: text; background-clip: text; color: transparent;
-  display: inline-block; min-width: 4.5ch; animation: gradientShift 7s ease infinite;
-  transition: opacity 0.35s ease, transform 0.35s ease;
+  display: inline-block;
 }
-.kinetic-word.swap { opacity: 0; transform: translateY(18px); }
-@keyframes gradientShift { 0%,100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
 .hero-sub { font-size: 18px; color: var(--ink-soft); max-width: 520px; margin-top: 22px; line-height: 1.65; }
 .hero-links { display: flex; align-items: center; gap: 14px; margin-top: 38px; flex-wrap: wrap; }
 .link-primary {
@@ -445,13 +442,6 @@ footer .wrap { display: flex; justify-content: space-between; align-items: cente
   .orb.o1, .orb.o2 { filter: blur(50px); opacity: 0.32; }
   .gradient-field::after { display: none; }
   .case-thumb::after { display: none; }
-  .kinetic-word {
-    animation: none;
-    background: none;
-    -webkit-background-clip: unset;
-    background-clip: unset;
-    color: var(--accent);
-  }
   body::before { display: none; }
   .signal-line::after { animation: none; opacity: 0; }
   .flow-line-fill::after { animation: none !important; }
@@ -829,22 +819,6 @@ footer .wrap { display: flex; justify-content: space-between; align-items: cente
 
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 const hasFineHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
-
-/* ── KINETIC HERO WORD ── */
-(function () {
-  const el = document.getElementById('kineticWord');
-  if (!el || prefersReducedMotion) return;
-  const words = ['Motion', 'AI', 'Story', 'Video', 'Design'];
-  let i = 0;
-  setInterval(() => {
-    el.classList.add('swap');
-    setTimeout(() => {
-      i = (i + 1) % words.length;
-      el.textContent = words[i];
-      el.classList.remove('swap');
-    }, 350);
-  }, 2200);
-})();
 
 /* ── HERO GRADIENT PARALLAX ── */
 (function () {
