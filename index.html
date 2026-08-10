@@ -27,7 +27,7 @@
   --grad-purple: #8B5CF6;
   --grad-pink: #EC4899;
   --grad-orange: #FF7A45;
-  --noise: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  --noise: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAAAAABWESUoAAACC0lEQVR42i3S0aArCxQD0Jz2AgxCEAZhIxQhCEXYCEUIwiAEYRCCMAjv5y2GBXeRkohTemapRF3QovWy08JcMGyBkouwHSXG2/ns8Xyqn67rWPXKcx7P7+ap4zwCzwpZDQvWbjMoDKSG/b7P07/nuXHiKD70nd/Zu/vd73FJ77sHD1zYY+1jurdHDyP0c5Xni4QmcdJh4BBCOgsPwf3nFArGnZAxvIG3gC1oMTtTbKcUMIN66gyzCUcgkg271UzK7m6xXHoU4bVLK3VaEMsmxJRLglJfWoNo2woNZ5UELsYZ9R23Fw+fIvC9LSyDHM+PPU/2NZ71jjrsWOAAhault8N/U0pV3DCTbEHuCqjL8EWgdjAeCOSMtsZGtWH8YVQvOhD+39AxhB2gzTvz/X7uE883/V09YvEwddz9Tn3+TTshunKDsTEJOJghRb1KNFiDqoud0gsa41YUPMNma1AYDGBNsc3EYP6yLtN6VKRtuRNORXsCaFhBrOLRtGwKD1ZFzX8lyQHjxNTCXadNZ43Bn6s2liQ6UjpbjlDArd+/+/k8v2++9xU+wbffSw/u63f0fPR57XZ3MSwU2RDRXREjtMYw0JjuKhwNVuaWJJrlW79rrif+Tg9/etzf/d1PcB6pi/uPXBGupBlMJwQ1GHLQWZhDaTbk7kCsKBXkRIHBKNNKWbhiNbvqAkg2+x/go8eWQoR2kwAAAABJRU5ErkJggg==");
 
   --font-display: 'Space Grotesk', sans-serif;
   --font-body: 'IBM Plex Sans', sans-serif;
@@ -53,8 +53,8 @@ body::before {
   content: '';
   position: fixed; inset: 0; z-index: 0; pointer-events: none;
   background-image:
-    linear-gradient(rgba(20,22,28,0.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(20,22,28,0.05) 1px, transparent 1px);
+    linear-gradient(rgba(20,22,28,0.022) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(20,22,28,0.022) 1px, transparent 1px);
   background-size: 64px 64px;
   mask-image: linear-gradient(to bottom, black 0%, black 88%, transparent 100%);
   -webkit-mask-image: linear-gradient(to bottom, black 0%, black 88%, transparent 100%);
@@ -77,8 +77,8 @@ a { color: inherit; }
   font-size: 11.5px;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: #7A2410;
-  background: rgba(122,36,16,0.08);
+  color: #5C1B0C;
+  background: rgba(92,27,12,0.08);
   display: inline-flex;
   align-items: center;
   gap: 8px;
@@ -111,7 +111,8 @@ h3 { font-size: 19px; line-height: 1.3; }
   border-bottom-color: var(--line);
 }
 .nav .wrap { display: flex; align-items: center; justify-content: space-between; }
-.nav-name { font-family: var(--font-display); font-weight: 700; font-size: 16px; letter-spacing: -0.01em; text-decoration: none; }
+.nav-name { display: inline-flex; align-items: center; gap: 9px; font-family: var(--font-display); font-weight: 700; font-size: 16px; letter-spacing: -0.01em; text-decoration: none; }
+.nav-avatar { width: 26px; height: 26px; border-radius: 50%; object-fit: cover; display: block; }
 .nav-links { display: flex; align-items: center; gap: 32px; }
 .nav-links a {
   font-size: 13.5px; font-weight: 500; text-decoration: none; color: var(--ink-soft);
@@ -140,14 +141,14 @@ h3 { font-size: 19px; line-height: 1.3; }
 
 /* ─── HERO ─── */
 .hero { padding: 168px 0 120px; position: relative; overflow: hidden; }
-.gradient-field { position: absolute; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; }
+.gradient-field { position: absolute; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; will-change: transform; }
 .orb { position: absolute; border-radius: 50%; filter: blur(95px); opacity: 0.5; will-change: transform; }
 .orb.o1 { width: 480px; height: 480px; background: var(--grad-blue); top: -140px; left: -100px; animation: floatA 15s ease-in-out infinite alternate; }
 .orb.o2 { width: 440px; height: 440px; background: var(--grad-purple); top: -60px; right: -80px; animation: floatB 18s ease-in-out infinite alternate; }
 .orb.o3 { width: 400px; height: 400px; background: var(--grad-pink); bottom: -180px; left: 30%; animation: floatC 16s ease-in-out infinite alternate; }
 .orb.o4 { width: 340px; height: 340px; background: var(--grad-orange); bottom: -120px; right: 18%; animation: floatD 20s ease-in-out infinite alternate; }
 .gradient-field::after {
-  content: ''; position: absolute; inset: 0; background-image: var(--noise);
+  content: ''; position: absolute; inset: 0; background-image: var(--noise); background-size: 64px 64px;
   opacity: 0.035; mix-blend-mode: overlay;
 }
 @keyframes floatA { 0% { transform: translate3d(0,0,0) scale(1); } 100% { transform: translate3d(50px,40px,0) scale(1.08); } }
@@ -163,7 +164,7 @@ h3 { font-size: 19px; line-height: 1.3; }
   background: linear-gradient(100deg, var(--grad-blue), var(--grad-purple) 35%, var(--grad-pink) 65%, var(--grad-orange));
   background-size: 260% 100%;
   -webkit-background-clip: text; background-clip: text; color: transparent;
-  display: inline-block; animation: gradientShift 7s ease infinite;
+  display: inline-block; min-width: 4.5ch; animation: gradientShift 7s ease infinite;
   transition: opacity 0.35s ease, transform 0.35s ease;
 }
 .kinetic-word.swap { opacity: 0; transform: translateY(18px); }
@@ -199,17 +200,19 @@ h3 { font-size: 19px; line-height: 1.3; }
   .motion-rail { display: block; }
 }
 .motion-rail::after {
-  content: ''; position: absolute; left: -2px; width: 5px; height: 140px; top: -140px;
+  content: ''; position: absolute; left: -1.5px; width: 3px; height: 90px; top: -90px;
   background: linear-gradient(to bottom, transparent, var(--grad-blue), var(--grad-purple), var(--grad-pink), transparent);
-  opacity: 0.55; border-radius: 3px; filter: blur(0.5px);
+  opacity: 0.3; border-radius: 2px; filter: blur(0.5px);
   animation: railTravel 11s linear infinite;
 }
-@keyframes railTravel { from { top: -140px; } to { top: 100%; } }
+@keyframes railTravel { from { top: -90px; } to { top: 100%; } }
 .cap-band-line {
   font-family: var(--font-display); font-weight: 600; font-size: clamp(18px, 2.6vw, 28px);
   color: var(--ink-soft); text-align: center; letter-spacing: -0.005em;
+  animation: capDrift 50s ease-in-out infinite;
 }
 .cap-band-line .sep { color: var(--accent); margin: 0 14px; font-weight: 400; }
+@keyframes capDrift { 0%, 100% { transform: translateX(-5px); } 50% { transform: translateX(5px); } }
 
 /* ─── SIGNAL LINE ─── */
 .signal-line { position: absolute; top: 140px; left: 0; right: 0; height: 2px; overflow: hidden; z-index: 0; pointer-events: none; }
@@ -237,53 +240,66 @@ h3 { font-size: 19px; line-height: 1.3; }
   text-decoration: none;
 }
 .case-row.in .case-thumb { transform: scale(1); }
-.case-thumb::after { content: ''; position: absolute; inset: 0; background-image: var(--noise); opacity: 0.05; mix-blend-mode: overlay; }
+.case-thumb-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; }
+.case-thumb::after { content: ''; position: absolute; inset: 0; background-image: var(--noise); background-size: 64px 64px; opacity: 0.05; mix-blend-mode: overlay; z-index: 2; }
 .case-thumb::before {
-  content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.35), transparent 45%);
+  content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.4), transparent 45%);
+  z-index: 1;
 }
 .case-thumb.g-brand {
   background:
     repeating-linear-gradient(90deg, rgba(255,255,255,0.08) 0, rgba(255,255,255,0.08) 1px, transparent 1px, transparent 33.333%),
     repeating-linear-gradient(0deg, rgba(255,255,255,0.08) 0, rgba(255,255,255,0.08) 1px, transparent 1px, transparent 33.333%),
     linear-gradient(135deg, var(--grad-blue), var(--grad-purple));
+  background-size: auto, auto, 220% 220%;
+  animation: thumbGradientShift 11s ease infinite;
 }
 .case-thumb.g-ai {
   background:
     repeating-linear-gradient(90deg, rgba(255,255,255,0.08) 0, rgba(255,255,255,0.08) 1px, transparent 1px, transparent 33.333%),
     repeating-linear-gradient(0deg, rgba(255,255,255,0.08) 0, rgba(255,255,255,0.08) 1px, transparent 1px, transparent 33.333%),
     linear-gradient(135deg, var(--grad-purple), var(--grad-pink));
+  background-size: auto, auto, 220% 220%;
+  animation: thumbGradientShift 13s ease infinite;
 }
 .case-thumb.g-learning {
   background:
     repeating-linear-gradient(90deg, rgba(255,255,255,0.08) 0, rgba(255,255,255,0.08) 1px, transparent 1px, transparent 33.333%),
     repeating-linear-gradient(0deg, rgba(255,255,255,0.08) 0, rgba(255,255,255,0.08) 1px, transparent 1px, transparent 33.333%),
     linear-gradient(135deg, var(--grad-pink), var(--grad-orange));
+  background-size: auto, auto, 220% 220%;
+  animation: thumbGradientShift 12s ease infinite;
 }
 .case-thumb.g-social {
   background:
     repeating-linear-gradient(90deg, rgba(255,255,255,0.08) 0, rgba(255,255,255,0.08) 1px, transparent 1px, transparent 33.333%),
     repeating-linear-gradient(0deg, rgba(255,255,255,0.08) 0, rgba(255,255,255,0.08) 1px, transparent 1px, transparent 33.333%),
     linear-gradient(135deg, var(--grad-orange), var(--grad-blue));
+  background-size: auto, auto, 220% 220%;
+  animation: thumbGradientShift 14s ease infinite;
 }
-.frame-corner { position: absolute; width: 20px; height: 20px; border-color: rgba(255,255,255,0.6); z-index: 1; }
+@keyframes thumbGradientShift {
+  0%, 100% { background-position: 0 0, 0 0, 0% 50%; }
+  50% { background-position: 0 0, 0 0, 100% 50%; }
+}
+.frame-corner { position: absolute; width: 20px; height: 20px; border-color: rgba(255,255,255,0.6); z-index: 3; }
 .frame-corner.tl { top: 16px; left: 16px; border-top: 1.5px solid; border-left: 1.5px solid; }
 .frame-corner.br { bottom: 16px; right: 16px; border-bottom: 1.5px solid; border-right: 1.5px solid; }
 .case-play {
   width: 50px; height: 50px; border-radius: 50%; background: rgba(255,255,255,0.2);
   border: 1.5px solid rgba(255,255,255,0.55); backdrop-filter: blur(6px);
   display: flex; align-items: center; justify-content: center; color: #fff; font-size: 16px;
-  transition: transform 0.25s ease, background 0.25s ease; z-index: 1;
+  transition: transform 0.25s ease, background 0.25s ease; z-index: 3;
 }
 .case-thumb:hover .case-play { transform: scale(1.12); background: rgba(255,255,255,0.3); }
-.case-thumb-label {
-  position: absolute; left: 20px; bottom: 16px; z-index: 1; color: #fff;
-  font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
-  text-shadow: 0 1px 8px rgba(0,0,0,0.35);
-}
 .case-copy { display: flex; flex-direction: column; gap: 14px; }
 .case-meta { display: flex; align-items: baseline; gap: 12px; }
-.case-num { font-family: var(--font-mono); font-size: 13px; color: var(--muted); }
-.case-cat { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); }
+.case-num {
+  font-family: var(--font-mono); font-weight: 500; font-size: 13.5px;
+  background: linear-gradient(100deg, var(--grad-blue), var(--grad-purple) 45%, var(--grad-pink) 75%, var(--grad-orange));
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.case-cat { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
 .case-role { font-size: 13.5px; font-weight: 500; color: var(--ink-soft); margin-top: -8px; }
 .case-desc { font-size: 15.5px; color: var(--ink-soft); line-height: 1.72; }
 .case-outcome {
@@ -405,7 +421,8 @@ h3 { font-size: 19px; line-height: 1.3; }
   transition: border-color 0.2s ease, background 0.2s ease;
 }
 .contact-card:hover { border-color: rgba(255,122,69,0.45); background: rgba(255,122,69,0.07); }
-.contact-card .cc-label { font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 8px; }
+.contact-card .cc-label { display: flex; align-items: center; gap: 7px; font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 8px; }
+.contact-card .cc-icon { width: 14px; height: 14px; flex-shrink: 0; }
 .contact-card .cc-value { font-size: 14.5px; font-weight: 600; transition: color 0.2s ease; }
 .contact-card:hover .cc-value { color: #FF7A45; }
 
@@ -427,6 +444,7 @@ footer .wrap { display: flex; justify-content: space-between; align-items: cente
   .orb.o3, .orb.o4 { display: none; }
   .orb.o1, .orb.o2 { filter: blur(50px); opacity: 0.32; }
   .gradient-field::after { display: none; }
+  .case-thumb::after { display: none; }
   .kinetic-word { animation: none; background-position: 30% 50%; }
   body::before { display: none; }
   .signal-line::after { animation: none; opacity: 0; }
@@ -471,14 +489,14 @@ footer .wrap { display: flex; justify-content: space-between; align-items: cente
 
 <header class="nav">
   <div class="wrap">
-    <a class="nav-name" href="#top">Tushar Kale</a>
+    <a class="nav-name" href="#top"><img class="nav-avatar" src="img/profile.jpg" alt="" onerror="this.remove()">Tushar Kale</a>
     <nav class="nav-links">
       <a href="#work">Work</a>
       <a href="#workflow">AI Workflow</a>
       <a href="#about">About</a>
       <a href="#contact">Contact</a>
     </nav>
-    <a class="nav-resume" href="https://drive.google.com/uc?export=download&id=1sE3xrhiO1wweiZ3p_pYQx_3DFQcoACyB" download>Résumé ↓</a>
+    <a class="nav-resume" href="https://drive.google.com/file/d/1sE3xrhiO1wweiZ3p_pYQx_3DFQcoACyB/view" target="_blank" rel="noopener">Résumé ↗</a>
   </div>
 </header>
 
@@ -500,7 +518,7 @@ footer .wrap { display: flex; justify-content: space-between; align-items: cente
         <p class="hero-sub">I turn complex product and enablement content into clear, motion-led stories — combining traditional animation craft with an AI-assisted creative pipeline, for customer education, sales enablement and enterprise learning.</p>
         <div class="hero-links">
           <a class="link-primary" href="#work">View Selected Work →</a>
-          <a class="link-secondary" href="https://drive.google.com/uc?export=download&id=1sE3xrhiO1wweiZ3p_pYQx_3DFQcoACyB" download>Download résumé</a>
+          <a class="link-secondary" href="https://drive.google.com/file/d/1sE3xrhiO1wweiZ3p_pYQx_3DFQcoACyB/view" target="_blank" rel="noopener">View résumé</a>
         </div>
       </div>
     </div>
@@ -527,7 +545,7 @@ footer .wrap { display: flex; justify-content: space-between; align-items: cente
 
         <article class="case-row reveal" data-index="01">
           <a class="case-thumb g-brand" href="https://www.behance.net/gallery/202013661/Motion-Graphic-Work" target="_blank" rel="noopener" data-cursor="Play">
-            <span class="case-thumb-label">Product &amp; Brand Motion Reels</span>
+            <img class="case-thumb-img" src="img/01.jpeg" alt="" onerror="this.remove()">
             <span class="case-play">▶</span>
             <span class="frame-corner tl"></span>
             <span class="frame-corner br"></span>
@@ -536,7 +554,7 @@ footer .wrap { display: flex; justify-content: space-between; align-items: cente
             <div class="case-meta"><span class="case-num">01</span><span class="case-cat">Motion Graphics</span></div>
             <h3>Product &amp; Brand Motion Reels</h3>
             <p class="case-role">Motion Graphic Designer · Cisco, via MindTickle · After Effects, Illustrator</p>
-            <p class="case-desc">Product launches and campaigns needed a consistent, high-impact visual identity that could translate dense messaging into something worth watching — so I designed a series of dynamic brand motion reels turning campaign and product messaging into short animated visual narratives.</p>
+            <p class="case-desc">Product launches and campaigns needed a consistent, high-impact visual identity — so I designed a series of dynamic brand motion reels turning campaign messaging into short animated visual narratives.</p>
             <p class="case-outcome"><span class="outcome-label">Outcome</span> Deployed across product launch and brand campaign communications.</p>
             <a class="case-link" href="https://www.behance.net/gallery/202013661/Motion-Graphic-Work" target="_blank" rel="noopener" data-cursor="Open">View project ↗</a>
           </div>
@@ -544,7 +562,7 @@ footer .wrap { display: flex; justify-content: space-between; align-items: cente
 
         <article class="case-row reverse reveal" data-index="02">
           <a class="case-thumb g-ai" href="https://www.behance.net/gallery/234758411/AI-projects" target="_blank" rel="noopener" data-cursor="Play">
-            <span class="case-thumb-label">AI-Assisted Video Production</span>
+            <img class="case-thumb-img" src="img/02.jpeg" alt="" onerror="this.remove()">
             <span class="case-play">▶</span>
             <span class="frame-corner tl"></span>
             <span class="frame-corner br"></span>
@@ -553,7 +571,7 @@ footer .wrap { display: flex; justify-content: space-between; align-items: cente
             <div class="case-meta"><span class="case-num">02</span><span class="case-cat">AI Video</span></div>
             <h3>AI-Assisted Video Production</h3>
             <p class="case-role">Motion Designer, AI Creative Workflow · Claude, Midjourney, Flow, ElevenLabs</p>
-            <p class="case-desc">Growing content demand meant traditional frame-by-frame animation timelines couldn't keep pace with delivery needs — so I built an end-to-end AI-assisted pipeline covering concept, image ideation, AI video generation and voiceover, composited and finished in After Effects.</p>
+            <p class="case-desc">Growing content demand meant traditional animation timelines couldn't keep pace with delivery needs — so I built an AI-assisted pipeline covering concept, ideation, generation and voiceover, composited in After Effects.</p>
             <p class="case-outcome"><span class="outcome-label">Outcome</span> Faster turnaround on video content without compromising production quality.</p>
             <a class="case-link" href="https://www.behance.net/gallery/234758411/AI-projects" target="_blank" rel="noopener" data-cursor="Open">View project ↗</a>
           </div>
@@ -561,7 +579,7 @@ footer .wrap { display: flex; justify-content: space-between; align-items: cente
 
         <article class="case-row reveal" data-index="03">
           <a class="case-thumb g-learning" href="https://www.behance.net/gallery/246011493/E-learning-design-mockups" target="_blank" rel="noopener" data-cursor="Play">
-            <span class="case-thumb-label">Enterprise Learning Systems</span>
+            <img class="case-thumb-img" src="img/03.jpeg" alt="" onerror="this.remove()">
             <span class="case-play">▶</span>
             <span class="frame-corner tl"></span>
             <span class="frame-corner br"></span>
@@ -570,7 +588,7 @@ footer .wrap { display: flex; justify-content: space-between; align-items: cente
             <div class="case-meta"><span class="case-num">03</span><span class="case-cat">Enterprise Learning</span></div>
             <h3>Enterprise Learning &amp; Sales Enablement</h3>
             <p class="case-role">Instructional Motion Designer · After Effects, Illustrator, Figma</p>
-            <p class="case-desc">Complex enterprise workflows and sales concepts were difficult for learners to absorb from static training material — so I designed motion-led e-learning mockups and explainer sequences that broke multi-step concepts into clear, sequential visual stories.</p>
+            <p class="case-desc">Enterprise workflows and sales concepts were hard for learners to absorb from static material — so I designed motion-led e-learning mockups breaking multi-step concepts into clear visual stories.</p>
             <p class="case-outcome"><span class="outcome-label">Outcome</span> Used in enterprise learning and sales enablement programs for a global sales organization.</p>
             <a class="case-link" href="https://www.behance.net/gallery/246011493/E-learning-design-mockups" target="_blank" rel="noopener" data-cursor="Open">View project ↗</a>
           </div>
@@ -578,7 +596,7 @@ footer .wrap { display: flex; justify-content: space-between; align-items: cente
 
         <article class="case-row reverse reveal" data-index="04">
           <a class="case-thumb g-social" href="https://www.behance.net/gallery/222092547/Social-Media-posts" target="_blank" rel="noopener" data-cursor="Play">
-            <span class="case-thumb-label">Social Content Design</span>
+            <img class="case-thumb-img" src="img/04.jpeg" alt="" onerror="this.remove()">
             <span class="case-play">▶</span>
             <span class="frame-corner tl"></span>
             <span class="frame-corner br"></span>
@@ -587,7 +605,7 @@ footer .wrap { display: flex; justify-content: space-between; align-items: cente
             <div class="case-meta"><span class="case-num">04</span><span class="case-cat">Social Media</span></div>
             <h3>Social Content Design</h3>
             <p class="case-role">Motion &amp; Social Content Designer · After Effects, Premiere Pro, Photoshop</p>
-            <p class="case-desc">Brand content needed to stop the scroll across multiple social formats and platforms — so I produced short-form reels, stories and visual assets tailored to platform-specific formats and audience behavior.</p>
+            <p class="case-desc">Brand content needed to stop the scroll across platforms — so I produced short-form reels, stories and visual assets tailored to each audience.</p>
             <p class="case-outcome"><span class="outcome-label">Outcome</span> Supported ongoing brand awareness content across social channels.</p>
             <a class="case-link" href="https://www.behance.net/gallery/222092547/Social-Media-posts" target="_blank" rel="noopener" data-cursor="Open">View project ↗</a>
           </div>
@@ -664,7 +682,7 @@ footer .wrap { display: flex; justify-content: space-between; align-items: cente
           <div class="marquee">
             <div class="marquee-track">
               <span>Motion Graphics <span class="sep">·</span> Brand Identity <span class="sep">·</span> 2D Animation <span class="sep">·</span> Visual Storytelling <span class="sep">·</span> Typography <span class="sep">·</span> Video Editing <span class="sep">·</span> Color Grading <span class="sep">·</span> UI/UX Design <span class="sep">·</span> <b>After Effects</b> <span class="sep">·</span> <b>Premiere Pro</b> <span class="sep">·</span> <b>Illustrator</b> <span class="sep">·</span> <b>Photoshop</b> <span class="sep">·</span> <b>Cinema 4D</b> <span class="sep">·</span> <b>Figma</b> <span class="sep">·</span> <b>Audition</b> <span class="sep">·</span> <b>Blender</b> <span class="sep">·</span></span>
-              <span>Motion Graphics <span class="sep">·</span> Brand Identity <span class="sep">·</span> 2D Animation <span class="sep">·</span> Visual Storytelling <span class="sep">·</span> Typography <span class="sep">·</span> Video Editing <span class="sep">·</span> Color Grading <span class="sep">·</span> UI/UX Design <span class="sep">·</span> <b>After Effects</b> <span class="sep">·</span> <b>Premiere Pro</b> <span class="sep">·</span> <b>Illustrator</b> <span class="sep">·</span> <b>Photoshop</b> <span class="sep">·</span> <b>Cinema 4D</b> <span class="sep">·</span> <b>Figma</b> <span class="sep">·</span> <b>Audition</b> <span class="sep">·</span> <b>Blender</b> <span class="sep">·</span></span>
+              <span aria-hidden="true">Motion Graphics <span class="sep">·</span> Brand Identity <span class="sep">·</span> 2D Animation <span class="sep">·</span> Visual Storytelling <span class="sep">·</span> Typography <span class="sep">·</span> Video Editing <span class="sep">·</span> Color Grading <span class="sep">·</span> UI/UX Design <span class="sep">·</span> <b>After Effects</b> <span class="sep">·</span> <b>Premiere Pro</b> <span class="sep">·</span> <b>Illustrator</b> <span class="sep">·</span> <b>Photoshop</b> <span class="sep">·</span> <b>Cinema 4D</b> <span class="sep">·</span> <b>Figma</b> <span class="sep">·</span> <b>Audition</b> <span class="sep">·</span> <b>Blender</b> <span class="sep">·</span></span>
             </div>
           </div>
         </div>
@@ -681,20 +699,20 @@ footer .wrap { display: flex; justify-content: space-between; align-items: cente
 
       <div class="contact-grid">
         <a class="contact-card" href="mailto:tusharkalemail@yahoo.in">
-          <div class="cc-label">Email</div>
+          <div class="cc-label"><svg class="cc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>Email</div>
           <div class="cc-value">tusharkalemail@yahoo.in</div>
         </a>
         <a class="contact-card" href="https://www.linkedin.com/in/tushar-kale-759635169" target="_blank" rel="noopener">
-          <div class="cc-label">LinkedIn</div>
+          <div class="cc-label"><svg class="cc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="3"/><line x1="7.2" y1="10" x2="7.2" y2="17"/><circle cx="7.2" cy="6.6" r="0.6" fill="currentColor" stroke="none"/><path d="M11 17v-4.3c0-1.4 1-2.3 2.1-2.3 1.2 0 2.1.9 2.1 2.3V17"/><line x1="11" y1="10" x2="11" y2="17"/></svg>LinkedIn</div>
           <div class="cc-value">tushar-kale-759635169</div>
         </a>
         <a class="contact-card" href="https://www.behance.net/tusharkaleTK/projects" target="_blank" rel="noopener">
-          <div class="cc-label">Behance</div>
+          <div class="cc-label"><svg class="cc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18"/><circle cx="8" cy="14.2" r="2"/><path d="M13.5 12.2h4.5M13.5 16.2h4.5"/></svg>Behance</div>
           <div class="cc-value">tusharkaleTK</div>
         </a>
-        <a class="contact-card" href="https://drive.google.com/uc?export=download&id=1sE3xrhiO1wweiZ3p_pYQx_3DFQcoACyB" download>
-          <div class="cc-label">Résumé</div>
-          <div class="cc-value">Download PDF ↓</div>
+        <a class="contact-card" href="https://drive.google.com/file/d/1sE3xrhiO1wweiZ3p_pYQx_3DFQcoACyB/view" target="_blank" rel="noopener">
+          <div class="cc-label"><svg class="cc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2h9l5 5v15H6z"/><path d="M15 2v6h5"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="15" y2="17"/></svg>Résumé</div>
+          <div class="cc-value">View résumé ↗</div>
         </a>
       </div>
     </div>
@@ -826,14 +844,18 @@ const hasFineHover = window.matchMedia('(hover: hover) and (pointer: fine)').mat
 (function () {
   const field = document.getElementById('gradientField');
   if (!field || prefersReducedMotion || !hasFineHover) return;
-  const orbs = field.querySelectorAll('.orb');
-  const depths = [18, 26, 14, 22];
+  let ticking = false;
+  let targetX = 0, targetY = 0;
   window.addEventListener('mousemove', (e) => {
-    const x = (e.clientX / window.innerWidth - 0.5);
-    const y = (e.clientY / window.innerHeight - 0.5);
-    orbs.forEach((orb, i) => {
-      orb.style.transform = `translate3d(${x * depths[i]}px, ${y * depths[i]}px, 0)`;
-    });
+    targetX = (e.clientX / window.innerWidth - 0.5) * 22;
+    targetY = (e.clientY / window.innerHeight - 0.5) * 22;
+    if (!ticking) {
+      requestAnimationFrame(() => {
+        field.style.transform = `translate3d(${targetX}px, ${targetY}px, 0)`;
+        ticking = false;
+      });
+      ticking = true;
+    }
   });
 })();
 
