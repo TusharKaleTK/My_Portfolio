@@ -445,7 +445,13 @@ footer .wrap { display: flex; justify-content: space-between; align-items: cente
   .orb.o1, .orb.o2 { filter: blur(50px); opacity: 0.32; }
   .gradient-field::after { display: none; }
   .case-thumb::after { display: none; }
-  .kinetic-word { animation: none; background-position: 30% 50%; }
+  .kinetic-word {
+    animation: none;
+    background: none;
+    -webkit-background-clip: unset;
+    background-clip: unset;
+    color: var(--accent);
+  }
   body::before { display: none; }
   .signal-line::after { animation: none; opacity: 0; }
   .flow-line-fill::after { animation: none !important; }
