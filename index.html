@@ -275,6 +275,14 @@ h3 { font-size: 19px; line-height: 1.3; }
   background-size: auto, auto, 220% 220%;
   animation: thumbGradientShift 14s ease infinite;
 }
+.case-thumb.g-enterprise {
+  background:
+    repeating-linear-gradient(90deg, rgba(255,255,255,0.08) 0, rgba(255,255,255,0.08) 1px, transparent 1px, transparent 33.333%),
+    repeating-linear-gradient(0deg, rgba(255,255,255,0.08) 0, rgba(255,255,255,0.08) 1px, transparent 1px, transparent 33.333%),
+    linear-gradient(135deg, var(--grad-blue), var(--grad-orange));
+  background-size: auto, auto, 220% 220%;
+  animation: thumbGradientShift 15s ease infinite;
+}
 @keyframes thumbGradientShift {
   0%, 100% { background-position: 0 0, 0 0, 0% 50%; }
   50% { background-position: 0 0, 0 0, 100% 50%; }
@@ -434,6 +442,7 @@ footer .wrap { display: flex; justify-content: space-between; align-items: cente
 #work-list .case-row:nth-child(2) { transition-delay: 0.06s; }
 #work-list .case-row:nth-child(3) { transition-delay: 0.06s; }
 #work-list .case-row:nth-child(4) { transition-delay: 0.06s; }
+#work-list .case-row:nth-child(5) { transition-delay: 0.06s; }
 
 /* ─── RESPONSIVE ─── */
 @media (max-width: 900px) {
@@ -509,7 +518,7 @@ footer .wrap { display: flex; justify-content: space-between; align-items: cente
     </div>
     <div class="wrap">
       <div class="hero-inner">
-        <div class="eyebrow">Motion Designer — Pune, India</div>
+        <div class="eyebrow">Senior Motion Graphics Designer — Pune, India</div>
         <div class="kinetic-wrap"><span class="kinetic-word" id="kineticWord">Motion</span></div>
         <h1>design for product &amp; enablement teams.</h1>
         <p class="hero-sub">I turn complex product and enablement content into clear, motion-led stories — combining traditional animation craft with an AI-assisted creative pipeline, for customer education, sales enablement and enterprise learning.</p>
@@ -552,7 +561,7 @@ footer .wrap { display: flex; justify-content: space-between; align-items: cente
             <h3>Product &amp; Brand Motion Reels</h3>
             <p class="case-role">Motion Graphic Designer · Cisco, via MindTickle · After Effects, Illustrator</p>
             <p class="case-desc">Product launches and campaigns needed a consistent, high-impact visual identity — so I designed a series of dynamic brand motion reels turning campaign messaging into short animated visual narratives.</p>
-            <p class="case-outcome"><span class="outcome-label">Outcome</span> Deployed across product launch and brand campaign communications.</p>
+            <p class="case-outcome"><span class="outcome-label">Outcome</span> Contributed to a launch campaign that drove a 90% improvement in trial conversion rate — recognized with MindTickle's Momentum Award.</p>
             <a class="case-link" href="https://www.behance.net/gallery/202013661/Motion-Graphic-Work" target="_blank" rel="noopener" data-cursor="Open">View project ↗</a>
           </div>
         </article>
@@ -567,7 +576,7 @@ footer .wrap { display: flex; justify-content: space-between; align-items: cente
           <div class="case-copy">
             <div class="case-meta"><span class="case-num">02</span><span class="case-cat">AI Video</span></div>
             <h3>AI-Assisted Video Production</h3>
-            <p class="case-role">Motion Designer, AI Creative Workflow · Claude, Midjourney, Flow, ElevenLabs</p>
+            <p class="case-role">Motion Designer, AI Creative Workflow · Claude, Google Flow, ElevenLabs</p>
             <p class="case-desc">Growing content demand meant traditional animation timelines couldn't keep pace with delivery needs — so I built an AI-assisted pipeline covering concept, ideation, generation and voiceover, composited in After Effects.</p>
             <p class="case-outcome"><span class="outcome-label">Outcome</span> Faster turnaround on video content without compromising production quality.</p>
             <a class="case-link" href="https://www.behance.net/gallery/234758411/AI-projects" target="_blank" rel="noopener" data-cursor="Open">View project ↗</a>
@@ -586,7 +595,7 @@ footer .wrap { display: flex; justify-content: space-between; align-items: cente
             <h3>Enterprise Learning &amp; Sales Enablement</h3>
             <p class="case-role">Instructional Motion Designer · After Effects, Illustrator, Figma</p>
             <p class="case-desc">Enterprise workflows and sales concepts were hard for learners to absorb from static material — so I designed motion-led e-learning mockups breaking multi-step concepts into clear visual stories.</p>
-            <p class="case-outcome"><span class="outcome-label">Outcome</span> Used in enterprise learning and sales enablement programs for a global sales organization.</p>
+            <p class="case-outcome"><span class="outcome-label">Outcome</span> Used in enterprise learning and sales enablement programs for a global sales organization — earned client appreciation from Cisco.</p>
             <a class="case-link" href="https://www.behance.net/gallery/246011493/E-learning-design-mockups" target="_blank" rel="noopener" data-cursor="Open">View project ↗</a>
           </div>
         </article>
@@ -608,6 +617,23 @@ footer .wrap { display: flex; justify-content: space-between; align-items: cente
           </div>
         </article>
 
+        <article class="case-row reveal" data-index="05">
+          <a class="case-thumb g-enterprise" href="https://www.behance.net/tusharkaleTK/projects" target="_blank" rel="noopener" data-cursor="Play">
+            <img class="case-thumb-img" src="img/05.jpeg" alt="" onerror="this.remove()">
+            <span class="case-play">▶</span>
+            <span class="frame-corner tl"></span>
+            <span class="frame-corner br"></span>
+          </a>
+          <div class="case-copy">
+            <div class="case-meta"><span class="case-num">05</span><span class="case-cat">Global Brand Systems</span></div>
+            <h3>Enterprise Motion &amp; Learning Systems</h3>
+            <p class="case-role">Visual Designer · Cognizant — clients included Google, Nike · After Effects, Illustrator, Adobe XD, Storyline</p>
+            <p class="case-desc">Global enterprise accounts needed high-fidelity motion graphics and immersive training content that stayed strictly on-brand across multiple product lines — so I built structured storyboards, reusable motion libraries and standardized style guides that let the work scale without breaking consistency.</p>
+            <p class="case-outcome"><span class="outcome-label">Outcome</span> Boosted learner completion rates and helped scale a reusable design system across enterprise accounts.</p>
+            <a class="case-link" href="https://www.behance.net/tusharkaleTK/projects" target="_blank" rel="noopener" data-cursor="Open">Browse Full Portfolio ↗</a>
+          </div>
+        </article>
+
       </div>
     </div>
   </section>
@@ -618,12 +644,12 @@ footer .wrap { display: flex; justify-content: space-between; align-items: cente
     <div class="wrap">
       <div class="cred-grid">
         <div class="cred-item reveal">
-          <div class="cred-num" data-count data-target="9" data-suffix="+">0</div>
+          <div class="cred-num" data-count data-target="10" data-suffix="+">0</div>
           <div class="cred-lbl">Years<span>Motion &amp; AI</span></div>
         </div>
         <div class="cred-item reveal">
-          <div class="cred-num" data-count data-target="30" data-suffix="+">0</div>
-          <div class="cred-lbl">Projects<span>Delivered</span></div>
+          <div class="cred-num" data-count data-target="200" data-suffix="+">0</div>
+          <div class="cred-lbl">Video Assets<span>Delivered</span></div>
         </div>
         <div class="cred-item reveal">
           <div class="cred-num text-stat">Cisco</div>
@@ -652,7 +678,7 @@ footer .wrap { display: flex; justify-content: space-between; align-items: cente
         <div class="flow-line-fill"></div>
         <div class="flow-grid">
           <div class="flow-step"><div class="flow-n">01</div><div class="flow-dot"></div><div class="flow-lbl">Concept</div><div class="flow-tools">Claude · Gemini</div></div>
-          <div class="flow-step"><div class="flow-n">02</div><div class="flow-dot"></div><div class="flow-lbl">Ideation</div><div class="flow-tools">Midjourney</div></div>
+          <div class="flow-step"><div class="flow-n">02</div><div class="flow-dot"></div><div class="flow-lbl">Ideation</div><div class="flow-tools">Claude · Google Flow Image Gen</div></div>
           <div class="flow-step"><div class="flow-n">03</div><div class="flow-dot"></div><div class="flow-lbl">Generation</div><div class="flow-tools">Google Flow (Veo) · Runway</div></div>
           <div class="flow-step"><div class="flow-n">04</div><div class="flow-dot"></div><div class="flow-lbl">Voice</div><div class="flow-tools">ElevenLabs</div></div>
           <div class="flow-step"><div class="flow-n">05</div><div class="flow-dot"></div><div class="flow-lbl">Compositing</div><div class="flow-tools">After Effects · Premiere Pro</div></div>
@@ -671,15 +697,15 @@ footer .wrap { display: flex; justify-content: space-between; align-items: cente
 
       <div class="cap-grid">
         <div class="reveal">
-          <p class="cap-bio">Crafting stories through movement, color and structure — bringing ideas to life with purposeful animation and thoughtful visual design, where every frame carries intent.</p>
+          <p class="cap-bio">Crafting stories through movement, color and structure — bringing ideas to life with purposeful animation and thoughtful visual design, where every frame carries intent. Alongside project work, I lead and mentor a creative team of 7–8 motion and graphic designers.</p>
         </div>
 
         <div class="skill-marquee reveal">
           <div class="skill-marquee-label">Creative Practice</div>
           <div class="marquee">
             <div class="marquee-track">
-              <span>Motion Graphics <span class="sep">·</span> Brand Identity <span class="sep">·</span> 2D Animation <span class="sep">·</span> Visual Storytelling <span class="sep">·</span> Typography <span class="sep">·</span> Video Editing <span class="sep">·</span> Color Grading <span class="sep">·</span> UI/UX Design <span class="sep">·</span> <b>After Effects</b> <span class="sep">·</span> <b>Premiere Pro</b> <span class="sep">·</span> <b>Illustrator</b> <span class="sep">·</span> <b>Photoshop</b> <span class="sep">·</span> <b>Cinema 4D</b> <span class="sep">·</span> <b>Figma</b> <span class="sep">·</span> <b>Audition</b> <span class="sep">·</span> <b>Blender</b> <span class="sep">·</span></span>
-              <span aria-hidden="true">Motion Graphics <span class="sep">·</span> Brand Identity <span class="sep">·</span> 2D Animation <span class="sep">·</span> Visual Storytelling <span class="sep">·</span> Typography <span class="sep">·</span> Video Editing <span class="sep">·</span> Color Grading <span class="sep">·</span> UI/UX Design <span class="sep">·</span> <b>After Effects</b> <span class="sep">·</span> <b>Premiere Pro</b> <span class="sep">·</span> <b>Illustrator</b> <span class="sep">·</span> <b>Photoshop</b> <span class="sep">·</span> <b>Cinema 4D</b> <span class="sep">·</span> <b>Figma</b> <span class="sep">·</span> <b>Audition</b> <span class="sep">·</span> <b>Blender</b> <span class="sep">·</span></span>
+              <span>Motion Graphics <span class="sep">·</span> Brand Identity <span class="sep">·</span> 2D Animation <span class="sep">·</span> Visual Storytelling <span class="sep">·</span> Typography <span class="sep">·</span> Video Editing <span class="sep">·</span> Color Grading <span class="sep">·</span> E-Learning UX/UI Architecture <span class="sep">·</span> AI Roleplay Video <span class="sep">·</span> HTML Prototyping <span class="sep">·</span> Vendor &amp; Asset Management <span class="sep">·</span> <b>After Effects</b> <span class="sep">·</span> <b>Premiere Pro</b> <span class="sep">·</span> <b>Illustrator</b> <span class="sep">·</span> <b>Photoshop</b> <span class="sep">·</span> <b>Cinema 4D</b> <span class="sep">·</span> <b>Figma</b> <span class="sep">·</span> <b>Audition</b> <span class="sep">·</span> <b>Blender</b> <span class="sep">·</span> <b>Lottie Animation</b> <span class="sep">·</span> <b>SVG</b> <span class="sep">·</span> <b>AWS Multimedia Content Management</b> <span class="sep">·</span></span>
+              <span aria-hidden="true">Motion Graphics <span class="sep">·</span> Brand Identity <span class="sep">·</span> 2D Animation <span class="sep">·</span> Visual Storytelling <span class="sep">·</span> Typography <span class="sep">·</span> Video Editing <span class="sep">·</span> Color Grading <span class="sep">·</span> E-Learning UX/UI Architecture <span class="sep">·</span> AI Roleplay Video <span class="sep">·</span> HTML Prototyping <span class="sep">·</span> Vendor &amp; Asset Management <span class="sep">·</span> <b>After Effects</b> <span class="sep">·</span> <b>Premiere Pro</b> <span class="sep">·</span> <b>Illustrator</b> <span class="sep">·</span> <b>Photoshop</b> <span class="sep">·</span> <b>Cinema 4D</b> <span class="sep">·</span> <b>Figma</b> <span class="sep">·</span> <b>Audition</b> <span class="sep">·</span> <b>Blender</b> <span class="sep">·</span> <b>Lottie Animation</b> <span class="sep">·</span> <b>SVG</b> <span class="sep">·</span> <b>AWS Multimedia Content Management</b> <span class="sep">·</span></span>
             </div>
           </div>
         </div>
