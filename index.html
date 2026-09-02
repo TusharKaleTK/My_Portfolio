@@ -157,6 +157,61 @@ h3 { font-size: 19px; line-height: 1.3; }
 @keyframes floatD { 0% { transform: translate3d(0,0,0) scale(1); } 100% { transform: translate3d(-30px,-40px,0) scale(1.1); } }
 
 .hero-inner { position: relative; z-index: 1; max-width: 760px; }
+
+/* ─── SIGNATURE SHAPE MORPH ─── */
+/* A single element cycling through 6 shapes via clip-path polygon animation.
+   All 6 shapes share the same 20-point layout so the browser interpolates
+   between points smoothly instead of jumping/twisting. Sized conservatively
+   so it fits inside the hero's actual rendered height at any viewport — an
+   earlier version sized it off viewport width alone, which could exceed the
+   hero's real height and get clipped top/bottom. Anchored in the hero's
+   empty space, with a mask fade so it softens to near-invisible before it
+   reaches the text — motion moves around the copy, not through it. */
+.hero-morph-wrap {
+  position: absolute; z-index: 0; pointer-events: none;
+  top: 50%; right: 9%; transform: translateY(-50%);
+  width: min(34vw, 440px); aspect-ratio: 1 / 1;
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, rgba(0,0,0,0.5) 35%, black 60%);
+  mask-image: linear-gradient(90deg, transparent 0%, rgba(0,0,0,0.5) 35%, black 60%);
+}
+.hero-morph {
+  width: 100%; height: 100%;
+  background: linear-gradient(120deg, var(--grad-blue), var(--grad-purple) 30%, var(--grad-pink) 60%, var(--grad-orange) 85%, var(--grad-blue));
+  background-size: 320% 320%;
+  opacity: 0.55;
+  animation: heroMorphShape 26s ease-in-out infinite, heroMorphHue 26s ease-in-out infinite;
+}
+.hero-morph.manual { animation: none; }
+
+/* Keyframe scrubber — click a dot to jump the shape to that keyframe.
+   Real interaction rather than decoration: it demonstrates the actual
+   craft (scrubbing between keyframes) rather than a generic UI toy. */
+.hero-morph-scrub {
+  position: absolute; left: 50%; bottom: -30px; transform: translateX(-50%);
+  display: flex; gap: 9px; pointer-events: auto;
+}
+.hero-morph-dot {
+  width: 9px; height: 9px; border-radius: 50%; padding: 0;
+  border: 1.5px solid rgba(20,22,28,0.28); background: transparent; cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+.hero-morph-dot:hover, .hero-morph-dot:focus-visible { border-color: var(--accent); transform: scale(1.25); }
+.hero-morph-dot.active { background: var(--accent); border-color: var(--accent); }
+
+@keyframes heroMorphShape {
+  0%   { clip-path: polygon(98.00% 50.00%, 95.65% 64.83%, 88.83% 78.21%, 78.21% 88.83%, 64.83% 95.65%, 50.00% 98.00%, 35.17% 95.65%, 21.79% 88.83%, 11.17% 78.21%, 4.35% 64.83%, 2.00% 50.00%, 4.35% 35.17%, 11.17% 21.79%, 21.79% 11.17%, 35.17% 4.35%, 50.00% 2.00%, 64.83% 4.35%, 78.21% 11.17%, 88.83% 21.79%, 95.65% 35.17%); }
+  16%  { clip-path: polygon(77.71% 50.00%, 84.11% 61.08%, 83.03% 74.00%, 67.44% 74.00%, 57.80% 74.00%, 50.00% 74.00%, 42.20% 74.00%, 32.56% 74.00%, 16.97% 74.00%, 15.89% 61.08%, 22.29% 50.00%, 26.66% 42.42%, 30.48% 35.82%, 34.56% 28.75%, 40.02% 19.29%, 50.00% 2.00%, 59.98% 19.29%, 65.44% 28.75%, 69.52% 35.82%, 73.34% 42.42%); }
+  33%  { clip-path: polygon(83.94% 50.00%, 83.94% 61.03%, 83.94% 74.66%, 74.66% 83.94%, 61.03% 83.94%, 50.00% 83.94%, 38.97% 83.94%, 25.34% 83.94%, 16.06% 74.66%, 16.06% 61.03%, 16.06% 50.00%, 16.06% 38.97%, 16.06% 25.34%, 25.34% 16.06%, 38.97% 16.06%, 50.00% 16.06%, 61.03% 16.06%, 74.66% 16.06%, 83.94% 25.34%, 83.94% 38.97%); }
+  50%  { clip-path: polygon(90.83% 50.00%, 86.93% 62.00%, 83.03% 74.00%, 78.21% 88.83%, 62.62% 88.83%, 50.00% 88.83%, 37.38% 88.83%, 21.79% 88.83%, 16.97% 74.00%, 13.07% 62.00%, 9.17% 50.00%, 4.35% 35.17%, 16.97% 26.00%, 27.17% 18.58%, 37.38% 11.17%, 50.00% 2.00%, 62.62% 11.17%, 72.83% 18.58%, 83.03% 26.00%, 95.65% 35.17%); }
+  66%  { clip-path: polygon(91.57% 50.00%, 91.57% 63.51%, 86.81% 76.75%, 74.57% 83.82%, 63.13% 90.42%, 50.00% 98.00%, 36.87% 90.42%, 25.43% 83.82%, 13.19% 76.75%, 8.43% 63.51%, 8.43% 50.00%, 8.43% 36.49%, 13.19% 23.25%, 25.43% 16.18%, 36.87% 9.58%, 50.00% 2.00%, 63.13% 9.58%, 74.57% 16.18%, 86.81% 23.25%, 91.57% 36.49%); }
+  83%  { clip-path: polygon(77.00% 50.00%, 69.17% 56.23%, 71.85% 65.87%, 78.21% 88.83%, 58.34% 75.68%, 50.00% 70.16%, 41.66% 75.68%, 21.79% 88.83%, 28.15% 65.87%, 30.83% 56.23%, 23.00% 50.00%, 4.35% 35.17%, 28.15% 34.13%, 38.15% 33.69%, 41.66% 24.32%, 50.00% 2.00%, 58.34% 24.32%, 61.85% 33.69%, 71.85% 34.13%, 95.65% 35.17%); }
+  100% { clip-path: polygon(98.00% 50.00%, 95.65% 64.83%, 88.83% 78.21%, 78.21% 88.83%, 64.83% 95.65%, 50.00% 98.00%, 35.17% 95.65%, 21.79% 88.83%, 11.17% 78.21%, 4.35% 64.83%, 2.00% 50.00%, 4.35% 35.17%, 11.17% 21.79%, 21.79% 11.17%, 35.17% 4.35%, 50.00% 2.00%, 64.83% 4.35%, 78.21% 11.17%, 88.83% 21.79%, 95.65% 35.17%); }
+}
+@keyframes heroMorphHue {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
 .kinetic-wrap { height: clamp(52px, 8vw, 96px); overflow: hidden; margin-bottom: 4px; }
 .kinetic-word {
   font-family: var(--font-display); font-weight: 700; letter-spacing: -0.02em;
@@ -399,9 +454,10 @@ h3 { font-size: 19px; line-height: 1.3; }
 .flow-tools { font-size: 12.5px; color: var(--muted); line-height: 1.5; }
 
 /* ─── CAPABILITIES / ABOUT ─── */
-.cap-grid { display: grid; grid-template-columns: 1fr; gap: 8px; }
-.cap-bio { font-size: 17px; color: var(--ink-soft); line-height: 1.75; max-width: 640px; }
-.skill-marquee { margin-top: 40px; padding-top: 32px; border-top: 1px solid var(--line); }
+.about-top { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: start; }
+.about-top .section-head { margin-bottom: 0; max-width: none; }
+.cap-bio { font-size: 17px; color: var(--ink-soft); line-height: 1.75; max-width: none; }
+.skill-marquee { margin-top: 48px; padding-top: 32px; border-top: 1px solid var(--line); }
 .skill-marquee-label { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 18px; }
 
 /* ─── MARQUEE ─── */
@@ -418,8 +474,9 @@ h3 { font-size: 19px; line-height: 1.3; }
 /* ─── CONTACT ─── */
 .contact { background: var(--ink); color: #fff; }
 .contact h2 { color: #fff; }
-.contact-sub { color: rgba(255,255,255,0.6); font-size: 16.5px; max-width: 480px; margin-top: 14px; }
-.contact-grid { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 40px; }
+.contact-top { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: start; }
+.contact-sub { color: rgba(255,255,255,0.6); font-size: 16.5px; max-width: 420px; margin-top: 14px; }
+.contact-grid { display: flex; gap: 14px; flex-wrap: wrap; align-content: flex-start; }
 .contact-card {
   flex: 1; min-width: 200px; border: 1px solid rgba(255,255,255,0.16); border-radius: 8px;
   padding: 18px 20px; text-decoration: none; color: #fff; background: rgba(255,255,255,0.03);
@@ -450,12 +507,21 @@ footer .wrap { display: flex; justify-content: space-between; align-items: cente
   .hero {
     background: linear-gradient(160deg, rgba(59,111,240,0.10), rgba(139,92,246,0.09) 35%, rgba(236,72,153,0.08) 65%, rgba(255,122,69,0.09));
   }
+  .hero-morph-wrap {
+    right: auto; left: 50%; top: 60%; transform: translate(-50%, -50%);
+    width: min(52vw, 300px);
+    -webkit-mask-image: radial-gradient(ellipse 60% 55% at 50% 50%, black 45%, transparent 85%);
+    mask-image: radial-gradient(ellipse 60% 55% at 50% 50%, black 45%, transparent 85%);
+  }
+  .hero-morph { opacity: 0.3; }
   .gradient-field::after { display: none; }
   .case-thumb::after { display: none; }
   body::before { display: none; }
   .signal-line::after { animation: none; opacity: 0; }
   .flow-line-fill::after { animation: none !important; }
-  .cap-grid { grid-template-columns: 1fr; gap: 36px; }
+  .about-top { grid-template-columns: 1fr; gap: 32px; }
+  .about-top .section-head { margin-bottom: 4px; }
+  .contact-top { grid-template-columns: 1fr; gap: 36px; }
   .case-row { grid-template-columns: 1fr; gap: 24px; }
   .case-row.reverse .case-thumb { order: 1; }
   .case-row.reverse .case-copy { order: 2; }
@@ -515,6 +581,17 @@ footer .wrap { display: flex; justify-content: space-between; align-items: cente
       <div class="orb o2"></div>
       <div class="orb o3"></div>
       <div class="orb o4"></div>
+    </div>
+    <div class="hero-morph-wrap">
+      <div class="hero-morph" id="heroMorph" aria-hidden="true"></div>
+      <div class="hero-morph-scrub" role="group" aria-label="Preview a shape keyframe">
+        <button class="hero-morph-dot" type="button" data-shape="circle" aria-label="Circle" title="Circle"></button>
+        <button class="hero-morph-dot" type="button" data-shape="triangle" aria-label="Triangle" title="Triangle"></button>
+        <button class="hero-morph-dot" type="button" data-shape="square" aria-label="Square" title="Square"></button>
+        <button class="hero-morph-dot" type="button" data-shape="pentagon" aria-label="Pentagon" title="Pentagon"></button>
+        <button class="hero-morph-dot" type="button" data-shape="hexagon" aria-label="Hexagon" title="Hexagon"></button>
+        <button class="hero-morph-dot" type="button" data-shape="star" aria-label="Star" title="Star"></button>
+      </div>
     </div>
     <div class="wrap">
       <div class="hero-inner">
@@ -690,23 +767,23 @@ footer .wrap { display: flex; justify-content: space-between; align-items: cente
   <!-- ─── ABOUT / CAPABILITIES ─── -->
   <section class="section" id="about">
     <div class="wrap">
-      <div class="section-head reveal">
-        <div class="eyebrow">Capabilities</div>
-        <div class="mask-reveal reveal"><h2>Motion design, grounded in production craft.</h2></div>
-      </div>
+      <div class="about-top">
+        <div class="section-head reveal">
+          <div class="eyebrow">Capabilities</div>
+          <div class="mask-reveal reveal"><h2>Motion design, grounded in production craft.</h2></div>
+        </div>
 
-      <div class="cap-grid">
         <div class="reveal">
           <p class="cap-bio">Crafting stories through movement, color and structure — bringing ideas to life with purposeful animation and thoughtful visual design, where every frame carries intent. Alongside project work, I lead and mentor a creative team of 7–8 motion and graphic designers.</p>
         </div>
+      </div>
 
-        <div class="skill-marquee reveal">
-          <div class="skill-marquee-label">Creative Practice</div>
-          <div class="marquee">
-            <div class="marquee-track">
-              <span>Motion Graphics <span class="sep">·</span> Brand Identity <span class="sep">·</span> 2D Animation <span class="sep">·</span> Visual Storytelling <span class="sep">·</span> Typography <span class="sep">·</span> Video Editing <span class="sep">·</span> Color Grading <span class="sep">·</span> E-Learning UX/UI Architecture <span class="sep">·</span> AI Roleplay Video <span class="sep">·</span> HTML Prototyping <span class="sep">·</span> Vendor &amp; Asset Management <span class="sep">·</span> <b>After Effects</b> <span class="sep">·</span> <b>Premiere Pro</b> <span class="sep">·</span> <b>Illustrator</b> <span class="sep">·</span> <b>Photoshop</b> <span class="sep">·</span> <b>Cinema 4D</b> <span class="sep">·</span> <b>Figma</b> <span class="sep">·</span> <b>Audition</b> <span class="sep">·</span> <b>Blender</b> <span class="sep">·</span> <b>Lottie Animation</b> <span class="sep">·</span> <b>SVG</b> <span class="sep">·</span> <b>AWS Multimedia Content Management</b> <span class="sep">·</span></span>
-              <span aria-hidden="true">Motion Graphics <span class="sep">·</span> Brand Identity <span class="sep">·</span> 2D Animation <span class="sep">·</span> Visual Storytelling <span class="sep">·</span> Typography <span class="sep">·</span> Video Editing <span class="sep">·</span> Color Grading <span class="sep">·</span> E-Learning UX/UI Architecture <span class="sep">·</span> AI Roleplay Video <span class="sep">·</span> HTML Prototyping <span class="sep">·</span> Vendor &amp; Asset Management <span class="sep">·</span> <b>After Effects</b> <span class="sep">·</span> <b>Premiere Pro</b> <span class="sep">·</span> <b>Illustrator</b> <span class="sep">·</span> <b>Photoshop</b> <span class="sep">·</span> <b>Cinema 4D</b> <span class="sep">·</span> <b>Figma</b> <span class="sep">·</span> <b>Audition</b> <span class="sep">·</span> <b>Blender</b> <span class="sep">·</span> <b>Lottie Animation</b> <span class="sep">·</span> <b>SVG</b> <span class="sep">·</span> <b>AWS Multimedia Content Management</b> <span class="sep">·</span></span>
-            </div>
+      <div class="skill-marquee reveal">
+        <div class="skill-marquee-label">Creative Practice</div>
+        <div class="marquee">
+          <div class="marquee-track">
+            <span>Motion Graphics <span class="sep">·</span> Brand Identity <span class="sep">·</span> 2D Animation <span class="sep">·</span> Visual Storytelling <span class="sep">·</span> Typography <span class="sep">·</span> Video Editing <span class="sep">·</span> Color Grading <span class="sep">·</span> E-Learning UX/UI Architecture <span class="sep">·</span> AI Roleplay Video <span class="sep">·</span> HTML Prototyping <span class="sep">·</span> Vendor &amp; Asset Management <span class="sep">·</span> <b>After Effects</b> <span class="sep">·</span> <b>Premiere Pro</b> <span class="sep">·</span> <b>Illustrator</b> <span class="sep">·</span> <b>Photoshop</b> <span class="sep">·</span> <b>Cinema 4D</b> <span class="sep">·</span> <b>Figma</b> <span class="sep">·</span> <b>Audition</b> <span class="sep">·</span> <b>Blender</b> <span class="sep">·</span> <b>Lottie Animation</b> <span class="sep">·</span> <b>SVG</b> <span class="sep">·</span> <b>AWS Multimedia Content Management</b> <span class="sep">·</span></span>
+            <span aria-hidden="true">Motion Graphics <span class="sep">·</span> Brand Identity <span class="sep">·</span> 2D Animation <span class="sep">·</span> Visual Storytelling <span class="sep">·</span> Typography <span class="sep">·</span> Video Editing <span class="sep">·</span> Color Grading <span class="sep">·</span> E-Learning UX/UI Architecture <span class="sep">·</span> AI Roleplay Video <span class="sep">·</span> HTML Prototyping <span class="sep">·</span> Vendor &amp; Asset Management <span class="sep">·</span> <b>After Effects</b> <span class="sep">·</span> <b>Premiere Pro</b> <span class="sep">·</span> <b>Illustrator</b> <span class="sep">·</span> <b>Photoshop</b> <span class="sep">·</span> <b>Cinema 4D</b> <span class="sep">·</span> <b>Figma</b> <span class="sep">·</span> <b>Audition</b> <span class="sep">·</span> <b>Blender</b> <span class="sep">·</span> <b>Lottie Animation</b> <span class="sep">·</span> <b>SVG</b> <span class="sep">·</span> <b>AWS Multimedia Content Management</b> <span class="sep">·</span></span>
           </div>
         </div>
       </div>
@@ -716,11 +793,14 @@ footer .wrap { display: flex; justify-content: space-between; align-items: cente
   <!-- ─── CONTACT ─── -->
   <section class="section contact" id="contact">
     <div class="wrap">
-      <div class="eyebrow">Get in touch</div>
-      <div class="mask-reveal reveal"><h2>Let's build something people actually use.</h2></div>
-      <p class="contact-sub">Open exclusively to full-time opportunities — not available for freelance or collaboration engagements.</p>
+      <div class="contact-top">
+        <div>
+          <div class="eyebrow">Get in touch</div>
+          <div class="mask-reveal reveal"><h2>Let's build something people actually use.</h2></div>
+          <p class="contact-sub">Open exclusively to full-time opportunities — not available for freelance or collaboration engagements.</p>
+        </div>
 
-      <div class="contact-grid">
+        <div class="contact-grid">
         <a class="contact-card" href="mailto:tusharkalemail@yahoo.in">
           <div class="cc-label"><svg class="cc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>Email</div>
           <div class="cc-value">tusharkalemail@yahoo.in</div>
@@ -737,6 +817,7 @@ footer .wrap { display: flex; justify-content: space-between; align-items: cente
           <div class="cc-label"><svg class="cc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2h9l5 5v15H6z"/><path d="M15 2v6h5"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="15" y2="17"/></svg>Résumé</div>
           <div class="cc-value">View résumé ↗</div>
         </a>
+      </div>
       </div>
     </div>
   </section>
@@ -846,6 +927,42 @@ footer .wrap { display: flex; justify-content: space-between; align-items: cente
 
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 const hasFineHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+
+/* ── HERO SHAPE SCRUBBER ── */
+(function () {
+  const morph = document.getElementById('heroMorph');
+  const dots = document.querySelectorAll('.hero-morph-dot');
+  if (!morph || !dots.length) return;
+  const shapes = {
+    circle:   'polygon(98.00% 50.00%, 95.65% 64.83%, 88.83% 78.21%, 78.21% 88.83%, 64.83% 95.65%, 50.00% 98.00%, 35.17% 95.65%, 21.79% 88.83%, 11.17% 78.21%, 4.35% 64.83%, 2.00% 50.00%, 4.35% 35.17%, 11.17% 21.79%, 21.79% 11.17%, 35.17% 4.35%, 50.00% 2.00%, 64.83% 4.35%, 78.21% 11.17%, 88.83% 21.79%, 95.65% 35.17%)',
+    triangle: 'polygon(77.71% 50.00%, 84.11% 61.08%, 83.03% 74.00%, 67.44% 74.00%, 57.80% 74.00%, 50.00% 74.00%, 42.20% 74.00%, 32.56% 74.00%, 16.97% 74.00%, 15.89% 61.08%, 22.29% 50.00%, 26.66% 42.42%, 30.48% 35.82%, 34.56% 28.75%, 40.02% 19.29%, 50.00% 2.00%, 59.98% 19.29%, 65.44% 28.75%, 69.52% 35.82%, 73.34% 42.42%)',
+    square:   'polygon(83.94% 50.00%, 83.94% 61.03%, 83.94% 74.66%, 74.66% 83.94%, 61.03% 83.94%, 50.00% 83.94%, 38.97% 83.94%, 25.34% 83.94%, 16.06% 74.66%, 16.06% 61.03%, 16.06% 50.00%, 16.06% 38.97%, 16.06% 25.34%, 25.34% 16.06%, 38.97% 16.06%, 50.00% 16.06%, 61.03% 16.06%, 74.66% 16.06%, 83.94% 25.34%, 83.94% 38.97%)',
+    pentagon: 'polygon(90.83% 50.00%, 86.93% 62.00%, 83.03% 74.00%, 78.21% 88.83%, 62.62% 88.83%, 50.00% 88.83%, 37.38% 88.83%, 21.79% 88.83%, 16.97% 74.00%, 13.07% 62.00%, 9.17% 50.00%, 4.35% 35.17%, 16.97% 26.00%, 27.17% 18.58%, 37.38% 11.17%, 50.00% 2.00%, 62.62% 11.17%, 72.83% 18.58%, 83.03% 26.00%, 95.65% 35.17%)',
+    hexagon:  'polygon(91.57% 50.00%, 91.57% 63.51%, 86.81% 76.75%, 74.57% 83.82%, 63.13% 90.42%, 50.00% 98.00%, 36.87% 90.42%, 25.43% 83.82%, 13.19% 76.75%, 8.43% 63.51%, 8.43% 50.00%, 8.43% 36.49%, 13.19% 23.25%, 25.43% 16.18%, 36.87% 9.58%, 50.00% 2.00%, 63.13% 9.58%, 74.57% 16.18%, 86.81% 23.25%, 91.57% 36.49%)',
+    star:     'polygon(77.00% 50.00%, 69.17% 56.23%, 71.85% 65.87%, 78.21% 88.83%, 58.34% 75.68%, 50.00% 70.16%, 41.66% 75.68%, 21.79% 88.83%, 28.15% 65.87%, 30.83% 56.23%, 23.00% 50.00%, 4.35% 35.17%, 28.15% 34.13%, 38.15% 33.69%, 41.66% 24.32%, 50.00% 2.00%, 58.34% 24.32%, 61.85% 33.69%, 71.85% 34.13%, 95.65% 35.17%)'
+  };
+  let resumeTimer = null;
+  dots.forEach(dot => {
+    dot.addEventListener('click', () => {
+      const shape = shapes[dot.dataset.shape];
+      if (!shape) return;
+      // Remove the CSS animation entirely (not just pause it) before setting
+      // an inline clip-path — a paused CSS animation still "wins" the cascade
+      // over an inline style for the property it animates, so pausing alone
+      // would not visually show the chosen shape.
+      morph.classList.add('manual');
+      morph.style.clipPath = shape;
+      dots.forEach(d => d.classList.remove('active'));
+      dot.classList.add('active');
+      clearTimeout(resumeTimer);
+      resumeTimer = setTimeout(() => {
+        morph.classList.remove('manual');
+        morph.style.clipPath = '';
+        dots.forEach(d => d.classList.remove('active'));
+      }, 4500);
+    });
+  });
+})();
 
 /* ── CURSOR TAG ── */
 (function () {
